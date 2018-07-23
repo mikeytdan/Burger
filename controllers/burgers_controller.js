@@ -1,7 +1,8 @@
 var express = require("express");
+var path = require("path");
 var router = express.Router();
 
-var burger = require("../models/burger");
+var burger = require(path.join(__dirname, '../models/burger'));
 
 function booleanValue(value) {
     if (typeof (value) === 'string') {

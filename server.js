@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var path = require("path");
 
 var app = express();
 
@@ -9,8 +10,14 @@ app.use(bodyParser.json());
 
 var exphbs = require("express-handlebars");
 
-app.use(express.static("public"));
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.use(express.static(path.join(__dirname, '/public/')));
+app.set('views', path.join(__dirname, '/views/'));
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main', 
+  extname: '.handlebars',
+  layoutsDir: path.join(__dirname, '/views/layouts/'),
+  partialsDir: path.join(__dirname, '/views/partials/')
+}));
 app.set("view engine", "handlebars");
 
 var routes = require("./controllers/burgers_controller.js");
@@ -23,3 +30,5 @@ if (!isNaN(port)) {
     console.log("App listening on PORT " + port);
   });
 }
+
+module.exports = app;

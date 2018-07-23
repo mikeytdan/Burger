@@ -6,7 +6,7 @@ $(function () {
             devoured: event.target.id == "devour-btn" ? true : false
         };
 
-        $.ajax("/api/burger/" + id, {
+        $.ajax("./api/burger/" + id, {
             type: "PUT",
             data: newDevouredState
         }).then(
@@ -28,7 +28,7 @@ $(function () {
             devoured: false
         }
 
-        $.ajax("/api/burger/", {
+        $.ajax("./api/burger/", {
             type: "POST",
             data: data
         }).then(
